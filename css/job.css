@@ -1,0 +1,36 @@
+#searchBar {
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  width: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#addBtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.split-fields {
+  display: flex;
+  gap: 10px; /* Space between first and last name fields */
+  /* margin-bottom: 5px; */
+}
+
+.split-fields div {
+  flex: 1; /* Each child takes 50% of the width */
+}
+
+.split-fields label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.split-fields input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

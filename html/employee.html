@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css"
+    />
+    <link rel="stylesheet" href="/case-study/css/employee.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/case-study/html/employee.html"
+                >Employee</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/case-study/html/department.html"
+                >Department</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/case-study/html/job.html"
+                >Job</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/case-study/html/history.html"
+                >Job History</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Employee</h1>
+      <div>
+        <input
+          class="form-control me-2"
+          id="searchBar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+      </div>
+
+      <table class="table table-bordered" id="employeeTable">
+        <thead class="table-primary text-center">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job</th>
+            <th>Salary</th>
+            <th>Comm Pct</th>
+            <th>Department</th>
+            <th>Hire Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="d-flex justify-content-center mt-3">
+        <nav aria-label="Employee list pagination">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                class="page-link"
+                id="prevButton"
+                aria-label="Previous"
+                disabled
+              >
+                Previous
+              </button>
+            </li>
+            <li class="page-link"><span id="pageCount"></span></li>
+            <li class="page-item">
+              <button class="page-link" id="nextButton" aria-label="Next">
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p id="info"></p>
+    </div>
+
+    <!-- Modal Structure -->
+    <div
+      class="modal fade"
+      id="updateModal"
+      tabindex="-1"
+      aria-labelledby="updateModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Update Employee</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="updateEmployeeForm">
+              <!-- Form fields for employee details -->
+              <div class="mb-3">
+                <div class="split-fields">
+                  <div>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" required />
+                  </div>
+                  <div>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" required />
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" />
+              </div>
+              <div class="mb-3">
+                <label for="passwordSignup" class="form-label">Password</label>
+                <input
+                  type="password"
+                  minlength="8"
+                  class="form-control"
+                  id="passwordSignup"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="phonenumber" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phonenumber" />
+              </div>
+              <div class="mb-3">
+                <div class="split-fields">
+                  <div>
+                    <label for="hireDate">Hire Date</label>
+                    <input type="date" id="hireDate" required />
+                  </div>
+                  <div>
+                    <label for="jobId">Job Id</label>
+                    <!-- <input type="text" id="jobId" required /> -->
+                    <select
+                      id="jobForm"
+                      class="form-select form-select-sm"
+                      aria-label=".form-select-sm example"
+                    >
+                      <option value="" selected disabled>Select Job</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="split-fields">
+                <div>
+                  <label for="managerId">Manager Id</label>
+                  <input type="number" id="managerId" />
+                </div>
+                <div>
+                  <label for="departmentId">Department Id</label>
+                  <!-- <input type="number" id="departmentId" required /> -->
+                  <select
+                    id="deptForm"
+                    class="form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option value="" selected disabled>Select Job</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="split-fields">
+                <div>
+                  <label for="salary">Salary</label>
+                  <input type="number" min="0" id="salary" />
+                </div>
+                <div>
+                  <label for="commissionPct">Commision</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    max="1"
+                    id="commissionPct"
+                  />
+                </div>
+              </div>
+              <!-- Add more fields as needed -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button id="submitBtn" type="button" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/case-study/js/employee.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script> -->
+    <script>
+      document.getElementById("hireDate").max = new Date()
+        .toISOString()
+        .split("T")[0];
+    </script>
+  </body>
+</html>

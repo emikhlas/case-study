@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="/case-study/css/register.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2>Register</h2>
+        <form id="registerForm" onsubmit="signUp(event)">
+          <div class="split-fields">
+            <div>
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" required />
+            </div>
+            <div>
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" required />
+            </div>
+          </div>
+
+          <label for="emailSignup">Email</label>
+          <input type="email" id="emailSignup" required />
+
+          <label for="password">Password</label>
+          <input type="password" minlength="8" id="passwordSignup" required />
+
+          <label for="phonenumber">Phone Number</label>
+          <input type="text" id="phonenumber" />
+
+          <div class="split-fields">
+            <div>
+              <label for="hireDate">Hire Date</label>
+              <input type="date" id="hireDate" required />
+            </div>
+            <div>
+              <label for="jobId">Job Id</label>
+              <!-- <input type="text" id="jobId" required /> -->
+              <select
+                id="jobForm"
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                required
+              >
+                <option style="color: gray" value="" selected disabled>
+                  Select Job
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="split-fields">
+            <div>
+              <label for="managerId">Manager Id</label>
+              <input type="number" min="0" id="managerId" />
+            </div>
+            <div>
+              <label for="departmentId">Department Id</label>
+              <!-- <input type="number" id="departmentId" required /> -->
+              <select
+                id="deptForm"
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                required
+              >
+                <option value="" selected disabled>Select Department</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="split-fields">
+            <div>
+              <label for="salary">Salary</label>
+              <input type="number" min="0" id="salary" />
+            </div>
+            <div>
+              <label for="commissionPct">Commision</label>
+              <input
+                type="number"
+                min="0"
+                max="1"
+                step="0.01"
+                id="commissionPct"
+              />
+            </div>
+          </div>
+
+          <button type="submit">Register</button>
+        </form>
+        <p style="text-align: center" id="message"></p>
+        <p style="text-align: center">
+          Already have an account?
+          <a href="/case-study/html/login.html">Sign In</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="/case-study/js/register.js"></script>
+    <script>
+      document.getElementById("hireDate").max = new Date()
+        .toISOString()
+        .split("T")[0];
+    </script>
+  </body>
+</html>
